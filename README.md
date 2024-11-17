@@ -75,6 +75,21 @@ To use the plugin, your `build.gradle` require these changes:
   
 4. Build your project with `gradlew clean build` : if some of your code is not compliant with the rules defined, the build will fail, pointing you to the rule(s) and the class(es) that are violating it.
 
+### Using Gradle <properties> configuration
+
+The plugin will reconfigure ArchUnit for each module, complete with standard gradle property expansion, before triggering the configured rules.
+
+For example, if you are packaging a freezing rule for use in a multi-module project, you can enable store creation and set the location relative to each module:
+
+
+```groovy
+archUnit {
+    properties.put("freeze.store.default.allowStoreCreation", true)
+    properties.put("freeze.store.default.path", "${projectDir}/archunit_store")
+}
+```
+
+
 ### Adding new rules
 
 All rules referenced in the configuration have to be available in the classpath. Therefore, you have 2 solutions : 

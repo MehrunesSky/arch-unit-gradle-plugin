@@ -7,7 +7,9 @@ import org.gradle.api.Project;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ArchUnitGradleConfig {
 
@@ -24,6 +26,9 @@ public class ArchUnitGradleConfig {
     private String testScopePath="/classes/java/test";
 
     private boolean skip = false;
+
+    private Map<String, String> properties = new HashMap<>();
+
 
     public ArchUnitGradleConfig(Project project) {
         this.project = project;
@@ -98,4 +103,11 @@ public class ArchUnitGradleConfig {
         this.testScopePath = testScopePath;
     }
 
+    public Map<String, String> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(Map<String, String> properties) {
+        this.properties = properties;
+    }
 }

@@ -9,6 +9,8 @@ import com.societegenerale.commons.plugin.model.Rules;
 import com.societegenerale.commons.plugin.service.RuleInvokerService;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.tngtech.archunit.ArchConfiguration;
 import org.apache.commons.lang3.StringUtils;
 import org.gradle.api.GradleException;
 import org.gradle.workers.WorkAction;
@@ -23,6 +25,11 @@ public abstract class WorkerAction implements WorkAction<WorkerActionParams> {
         WorkerActionParams params = getParameters();
 
         Collection<String> excludedPaths = params.getExcludedPaths().get();
+
+        var configuration = ArchConfiguration.get();
+        params.getProperties()
+                .get()
+                .forEach(configuration::setProperty);
 
         RuleInvokerService ruleInvokerService = new RuleInvokerService(
             new GradleLogAdapter(LoggerFactory.getLogger(RuleInvokerService.class)),

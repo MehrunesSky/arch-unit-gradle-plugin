@@ -3,6 +3,7 @@ package com.societegenerale.commons.plugin.gradle;
 import java.io.Serializable;
 import java.util.ArrayList;
 import org.gradle.api.provider.ListProperty;
+import org.gradle.api.provider.MapProperty;
 import org.gradle.api.provider.Property;
 import org.gradle.workers.WorkParameters;
 
@@ -18,6 +19,8 @@ public interface WorkerActionParams extends WorkParameters {
     ListProperty<String> getPreConfiguredRules();
 
     ListProperty<WorkerActionParams.ConfigurableRule> getConfigurableRules();
+
+    MapProperty<String, String> getProperties();
 
     class ConfigurableRule implements Serializable {
         static final long serialVersionUID = 1L;
